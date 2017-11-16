@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">    
+  </head>
+  
+  <body>
+
+<input type="text" id="code" placeholder="Bank  Code" onkeyup="calculate()" onkeypress="calculate()" maxlength="4" />
+
+<input type="text" id="prefix" placeholder="Bank  Account Prefix" onkeyup="calculate()" onkeypress="calculate()" pattern=".{6}." maxlength="6"  />
+
+<input type="text" id="acc" placeholder="Bank Account Number" onkeyup="calculate()" onkeypress="calculate()" maxlength="10" />
+
+<input type="text" id="iban" size="28" placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"/>
+
+<p id="test"></p>
+<script>
+
+function con(num)  
+    
+    
+function modulo(bban) 
+{
+var k = 0, i=0;
+for (i = 0; i < bban.length; i++) 
+{
+k = ((k* 10) + parseInt(bban.charAt(i), 10)) % 97;
+}
+return k;
+
+console.log(k);
+}
+
+function calculate() 
+{
+var m = 0;
+var sk="SK";
+var code = document.getElementById("code").value;
+var acc = document.getElementById("acc").value;
+var prefix=document.getElementById("prefix").value;
+
+    
+var checksum =98-modulo(code + prefix + acc  + "282000");  
+if(parseInt(checksum)<10)
+    {
+          checksum="0" + checksum;
+  
+    }
+
+document.getElementById("iban").value =sk + " " + checksum + " "+ code + " " +  prefix + " " + acc;
+
+}
+      
+      </script>
+
+</body>
+</html>
