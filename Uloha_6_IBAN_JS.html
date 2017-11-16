@@ -17,9 +17,14 @@
 <p id="test"></p>
 <script>
 
-function con(num)  
-    
-    
+function con(num, size) 
+{
+var st = num+"";
+while (st.length < size)
+st = "0" + st;
+return st;
+}
+        
 function modulo(bban) 
 {
 var k = 0, i=0;
@@ -28,31 +33,23 @@ for (i = 0; i < bban.length; i++)
 k = ((k* 10) + parseInt(bban.charAt(i), 10)) % 97;
 }
 return k;
-
-console.log(k);
 }
 
 function calculate() 
 {
 var m = 0;
 var sk="SK";
-var code = document.getElementById("code").value;
-var acc = document.getElementById("acc").value;
-var prefix=document.getElementById("prefix").value;
-
+var code=con(document.getElementById("code").value,4);
+var acc=con(document.getElementById("acc").value,10);
+var prefix=con(document.getElementById("prefix").value,6);
     
 var checksum =98-modulo(code + prefix + acc  + "282000");  
 if(parseInt(checksum)<10)
     {
-          checksum="0" + checksum;
-  
+          checksum="0" + checksum;  
     }
-
 document.getElementById("iban").value =sk + " " + checksum + " "+ code + " " +  prefix + " " + acc;
-
-}
-      
-      </script>
-
+}      
+</script>
 </body>
 </html>
